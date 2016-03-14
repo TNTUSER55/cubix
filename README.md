@@ -34,10 +34,10 @@ Unless specified otherwise, operators do not pop their operands from the stack.
 
 - `0-9` - push that digit.
 - `'` - push the char code of the next char.
-- `"` - starts/ends a string literal, performing `'` on each item until the next `"`.
-- `N` - pushes a newline, or 10.
-- `S` - pushes a space, or 32.
-- `Q` - pushes a quote, or 34.
+- `"` - start/end a string literal, performing `'` on each item until the next `"`.
+- `N` - push a newline, or 10.
+- `S` - push a space, or 32.
+- `Q` - push a quote, or 34.
 
 ### Control flow
 
@@ -52,6 +52,8 @@ Unless specified otherwise, operators do not pop their operands from the stack.
 - `^` - point the IP north.
 - `W` - turn the IP left, then left again before executing the next instruction.
 - `w` - turn the IP right, then right again before executing the next instruction.
+- `$` - skip the next instruction.
+- `!` - if the top item is truthy, skip the next instruction.
 - `?` - if the top item is less than zero, turn left; if it's more than zero, turn right; otherwise, continue straight.
 - `@` - end the program.
 
@@ -61,3 +63,4 @@ More spec coming soon.
 
 - `:` - duplicate the top item.
 - `;` - pop/discard the top item.
+- `#` - push the stack length.
