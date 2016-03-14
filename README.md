@@ -1,6 +1,6 @@
 # cubix
 
-A 2D esoteric language wrapped around the faces of a cube. [Temporary online interpreter](https://jsfiddle.net/vvc4dgvq/2/), [Code design helper](https://jsfiddle.net/vihanb/w5p8p2ms/26/embedded/result/)
+A 2D esoteric language wrapped around the faces of a cube. [Temporary online interpreter](https://jsfiddle.net/vvc4dgvq/4/), [Code design helper](https://jsfiddle.net/vihanb/w5p8p2ms/26/embedded/result/)
 
 ## Basics
 
@@ -16,6 +16,7 @@ Unless specified otherwise, operators do not pop their operands from the stack.
 
 - `i` - input the next char.
 - `I` - scan through the input until an integer (signed or unsigned) is found, and push that integer.
+- `A` - input all remaining char codes. The first one will end up on top.
 - `o` - output the current top-of-stack as a char code.
 - `O` - output the current top-of-stack as a number.
 
@@ -50,8 +51,10 @@ Unless specified otherwise, operators do not pop their operands from the stack.
 - `v` - point the IP south.
 - `<` - point the IP west.
 - `^` - point the IP north.
-- `W` - turn the IP left, then left again before executing the next instruction.
-- `w` - turn the IP right, then right again before executing the next instruction.
+- `U` - turn the IP left, then left again before executing the next instruction.
+- `u` - turn the IP right, then right again before executing the next instruction.
+- `W` - turn the IP left, then right before executing the next instruction.
+- `w` - turn the IP right, then left before executing the next instruction.
 - `$` - skip the next instruction.
 - `!` - if the top item is truthy, skip the next instruction.
 - `?` - if the top item is less than zero, turn left; if it's more than zero, turn right; otherwise, continue straight.
