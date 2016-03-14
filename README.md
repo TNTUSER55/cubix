@@ -1,6 +1,6 @@
 # cubix
 
-A 2D esoteric language wrapped around the faces of a cube. [Temporary online interpreter](https://jsfiddle.net/vvc4dgvq/2/), [Code design helper](https://jsfiddle.net/vihanb/w5p8p2ms/25/embedded/result/)
+A 2D esoteric language wrapped around the faces of a cube. [Temporary online interpreter](https://jsfiddle.net/vvc4dgvq/2/), [Code design helper](https://jsfiddle.net/vihanb/w5p8p2ms/26/embedded/result/)
 
 ## Basics
 
