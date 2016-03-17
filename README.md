@@ -31,7 +31,7 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 ### I/O
 
 - `i` - input the next char code. If none are left, pushes -1.
-- `I` - scan through the input until an integer (signed or unsigned) is found, and push that integer. If none are left, pushes 0.
+- `I` - scan through the input until the first match of `/-?\d+/` is found, and push that integer. If none are left, pushes 0.
 - `A` - input all remaining char codes. The first one will end up on top. EOF is marked as -1.
 - `o` - output the current top-of-stack as a char code.
 - `O` - output the current top-of-stack as a number.
