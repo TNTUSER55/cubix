@@ -4,32 +4,53 @@ A 2D esoteric language wrapped around the faces of a cube. [Temporary online int
 
 ## Basics
 
-More spec here soon.
+The first thing the interpreter does is remove whitespace, then figure out the smallest cube that the code will fit onto. The code is then padded with no-ops until all six sides are filled. That means that this "Hello, World!" program:
+
+    ./v.o;@?/"!dlroW"S',u/"Hello"
+
+is exactly the same as this one:
+
+          . / v
+          . o ;
+          @ ? /
+    " ! d l r o W " S ' , u
+    / " H e l l o " . . . .
+    . . . . . . . . . . . .
+          . . .
+          . . .
+          . . .
+
+Then the code is run like a 2-dimensional language, except that the IP (instruction pointer) wraps around like the code is on a cub.e
 
 ## Commands
 
-Unless specified otherwise, operators do not pop their operands from the stack.
+Unless specified otherwise (with "pop" or "in place"), operators do not remove their operands from the stack.
 
 \* designates not implemented yet.
 
 ### I/O
 
-- `i` - input the next char.
-- `I` - scan through the input until an integer (signed or unsigned) is found, and push that integer.
-- `A` - input all remaining char codes. The first one will end up on top.
+- `i` - input the next char code. If none are left, pushes -1.
+- `I` - scan through the input until an integer (signed or unsigned) is found, and push that integer. If none are left, pushes 0.
+- `A` - input all remaining char codes. The first one will end up on top. EOF is marked as -1.
 - `o` - output the current top-of-stack as a char code.
 - `O` - output the current top-of-stack as a number.
 
 ### Arithmetic
 
-- `(` - decrement the top item.
-- `)` - increment the top item.
+- `(` - decrement the top item in place.
+- `)` - increment the top item in place.
 - `+` - add the top two items.
 - `-` - subtract the top two items.
 - `*` - multiply the top two items.
 - `,` - integer divide the top two items, rounding toward negative infinity.
 - `%` - take modulo of the top two items.
 - `&` - pop two integers, concatenate their digits, and push the result as an int.
+- `n`* - negate the top item in place.
+- `~`* - take bitwise NOT of the top item in place.
+- `a`* - take bitwise AND of the top two items.
+- `b`* - take bitwise OR of the top two items.
+- `c`* - take bitwise XOR of the top two items.
 
 ### Literals
 
@@ -62,8 +83,6 @@ Unless specified otherwise, operators do not pop their operands from the stack.
 - `!` - if the top item is truthy, skip the next instruction.
 - `?` - if the top item is less than zero, turn left; if it's more than zero, turn right; otherwise, continue straight.
 - `@` - end the program.
-
-More spec coming soon.
 
 ### Stack manipulation
 
