@@ -60,7 +60,6 @@ function run() {
         if (state === "skip") state = "";
         else if (state === "char") stack.push(char.charCodeAt(0)), state = "";
         else if (state === "string") char === "\"" ? state = "" : stack.push(char.charCodeAt(0));
-        else if (char === "u") alert(ip.d), ip.d = (ip.d + 1) % 4, alert(ip.d), state = "rotate-r";
         
         else if (/\d/.test(char)) stack.push(+char);
         else if (char === "N") stack.push(10);
@@ -68,6 +67,7 @@ function run() {
         else if (char === "S") stack.push(32);
         else if (char === "'") state = "char";
         else if (char === '"') state = "string";
+        else if (char === "u") alert(ip.d), ip.d = (ip.d + 1) % 4, alert(ip.d), state = "rotate-r";
         
         else if (char === "&") stack.push(+[stack.pop()||"0",stack.pop()||""].reverse().join(""));
         else if (char === "#") stack.push(stack.length);
