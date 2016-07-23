@@ -53,7 +53,7 @@ function run() {
     
     function update() {
         var char = board[ip.f][ip.y][ip.x];
-        document.getElementById("debug").checked&&console.log("face:",ip.f,"x:",ip.x,"y:",ip.y,"dir:","ESWN"[ip.d],"char:",char,"state:",state,"stack:",stack.slice());
+        document.getElementById("debug").checked&&console.log("face:",ip.f,"x:",ip.x,"y:",ip.y,"dir:","ESWN"[ip.d],"char:",char,"stack:",stack.slice(),"state:",state);
         if (state === "rotate-l") ip.d = (ip.d + 3) % 4, state = "";
         else if (state === "rotate-r") ip.d = (ip.d + 1) % 4, state = "";
         
