@@ -2,7 +2,7 @@ var interval = -1;
 
 function run() {
     document.getElementById("output").value = "";
-    var code = document.getElementById("code").value.replace(/s/g,"");
+    var code = document.getElementById("code").value.replace(/\s/g,"");
     var size = Math.ceil(Math.sqrt(code.length / 6));
     while (code.length < size * size * 6) code += ".";
     var board = [];
@@ -81,7 +81,7 @@ function run() {
         else if (char === "O") document.getElementById("output").value += stack[stack.length-1] || 0;
         else if (char === "i") stack.push(input ? input.charCodeAt(0): -1), input = input.slice(1);
         else if (char === "A") { stack.push(-1); for (var i = input.length; i-- > 0; ) stack.push(input.charCodeAt(i)); input = ""; }
-        else if (char === "I") stack.push(+(input.match(/-?d+/)||[-1])[0] || 0), input = input.replace(/^.*?d+/,"");
+        else if (char === "I") stack.push(+(input.match(/-?\d+/)||[-1])[0] || 0), input = input.replace(/^.*?\d+/,"");
         
         else if (char === ">") ip.d = 0;
         else if (char === "v") ip.d = 1;
