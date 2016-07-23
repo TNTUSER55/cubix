@@ -149,7 +149,15 @@ function run() {
         }
     }
     
+    document.getElementById("run").disabled = true;
+    document.getElementById("run").innerHTML = "Running...";
+    
     interval = setInterval(update,50);
 }
 
-function stop(m){clearInterval(interval);console.log(m);}
+function stop(m) {
+    clearInterval(interval);
+    console.log(m);
+    document.getElementById("run").disabled = false;
+    document.getElementById("run").innerHTML = "Run";
+}
