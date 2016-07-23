@@ -3,19 +3,29 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
 		<title>Cubix interpreter</title>
-		<link rel="stylesheet" type="text/css" href="../style/style.css">
 		<script src="cubix.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro' rel='stylesheet' type='text/css'>
+		<style>
+			* {
+				font-family: "Source Sans Pro", sans-serif;
+			}
+			
+			textarea {
+				font-family: "Source Code Pro", monospace;
+				font-size: 14px;
+			}
+		</style>
 	</head>
 	<body>
-		<textarea id="code" placeholder="Code">./v.o;@?/"!dlroW"S',u/"Hello"</textarea>
+		<textarea id="code" rows=5 cols=50 placeholder="Code">./v.o;@?/"!dlroW"S',u/"Hello"</textarea>
 		<br>
-		<textarea id="input" placeholder="Input"></textarea>
+		<textarea id="input" rows=2 cols=50 placeholder="Input"></textarea>
 		<br>
-		<button onclick="run()">Run</button>
-		<button onclick="stop('Program stopped manually.')">Stop</button>
+		<button id="run" onclick="run()">Run</button>
+		<button id="stop" onclick="stop('Program stopped manually.')">Stop</button>
 		<input type="checkbox" id="debug">Debug*
 		<br>
-		<textarea id="output" placeholder="Output appears here."></textarea><br>
+		<textarea id="output" rows=3 cols=50 placeholder="Output appears here."></textarea><br>
 		* Sends debug info to browser console.
 		<p>More here soon.</p>
 	</body>
