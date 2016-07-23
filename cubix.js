@@ -58,9 +58,9 @@ function run() {
         else if (state === "rotate-r") ip.d = (ip.d + 1) % 4, state = "";
         
         if (state === "skip") state = "";
-        else if (char === "u") alert(ip.d), ip.d = (ip.d + 1) % 4, alert(ip.d), state = "rotate-r";
         else if (state === "char") stack.push(char.charCodeAt(0)), state = "";
         else if (state === "string") char === "\"" ? state = "" : stack.push(char.charCodeAt(0));
+        else if (char === "u") alert(ip.d), ip.d = (ip.d + 1) % 4, alert(ip.d), state = "rotate-r";
         
         else if (/\d/.test(char)) stack.push(+char);
         else if (char === "N") stack.push(10);
