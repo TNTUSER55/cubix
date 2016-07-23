@@ -61,7 +61,7 @@ function run() {
         else if (state === "char") stack.push(char.charCodeAt(0)), state = "";
         else if (state === "string") char === "\"" ? state = "" : stack.push(char.charCodeAt(0));
         
-        else if (/d/.test(char)) stack.push(+char);
+        else if (/\d/.test(char)) stack.push(+char);
         else if (char === "N") stack.push(10);
         else if (char === "Q") stack.push(34);
         else if (char === "S") stack.push(32);
