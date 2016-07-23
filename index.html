@@ -1,11 +1,22 @@
 <!doctype html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-    <title>Cubix interpreter</title>
-    <link rel="stylesheet" type="text/css" href="../style/style.css">
-  </head>
-  <body>
-   <p>More here soon.</p>
-  </body>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+		<title>Cubix interpreter</title>
+		<link rel="stylesheet" type="text/css" href="../style/style.css">
+		<script src="cubix.js"></script>
+	</head>
+	<body>
+		<textarea id="code" placeholder="Code">./v.o;@?/"!dlroW"S',u/"Hello"</textarea>
+		<br>
+		<textarea id="input" placeholder="Input"></textarea>
+		<br>
+		<button onclick="run()">Run</button>
+		<button onclick="stop('Program stopped manually.')">Stop</button>
+		<input type="checkbox" id="debug">Debug*
+		<br>
+		<textarea id="output" placeholder="Output appears here."></textarea><br>
+		* Sends debug info to browser console.
+		<p>More here soon.</p>
+	</body>
 </html>
