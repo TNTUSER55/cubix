@@ -60,44 +60,64 @@ function run() {
         if (state === "skip") state = "";
         else if (state === "char") stack.push(char.charCodeAt(0)), state = "";
         else if (state === "string") char === "\"" ? state = "" : stack.push(char.charCodeAt(0));
+        
         else if (/d/.test(char)) stack.push(+char);
-        else if (char === "&") stack.push(+[stack.pop()||"0",stack.pop()||""].reverse().join(""));
-        else if (char === "#") stack.push(stack.length);
+        else if (char === "N") stack.push(10);
+        else if (char === "Q") stack.push(34);
+        else if (char === "S") stack.push(32);
         else if (char === "'") state = "char";
         else if (char === '"') state = "string";
+        
+        else if (char === "&") stack.push(+[stack.pop()||"0",stack.pop()||""].reverse().join(""));
+        else if (char === "#") stack.push(stack.length);
+        else if (char === ";") stack.pop();
+        else if (char === ":") stack.push(stack[stack.length-1]||0);
+        else if (char === "s") stack.push((stack.pop()||0), (stack.pop()||0));
+        else if (char === "r") stack.push.apply(stack, stack.splice(-3, 2));
+        else if (char === "q") stack.unshift((stack.pop()||0));
+        else if (char === "t") if(stack.length) stack.push(stack.splice(~stack.pop(), 1)[0]);
+        
         else if (char === "o") document.getElementById("output").value += String.fromCharCode(stack[stack.length-1]);
         else if (char === "O") document.getElementById("output").value += stack[stack.length-1] || 0;
         else if (char === "i") stack.push(input ? input.charCodeAt(0): -1), input = input.slice(1);
         else if (char === "A") { stack.push(-1); for (var i = input.length; i-- > 0; ) stack.push(input.charCodeAt(i)); input = ""; }
         else if (char === "I") stack.push(+(input.match(/-?d+/)||[-1])[0] || 0), input = input.replace(/^.*?d+/,"");
-        else if (char === "@") return stop("Program finished.");
+        
         else if (char === ">") ip.d = 0;
         else if (char === "v") ip.d = 1;
         else if (char === "<") ip.d = 2;
         else if (char === "^") ip.d = 3;
         else if (char === "/") ip.d ^= 3;
-        else if (char === "") ip.d ^= 1;
+        else if (char === "\\") ip.d ^= 1;
         else if (char === "|") ip.d = [2,1,0,3][ip.d];
         else if (char === "_") ip.d = [0,3,2,1][ip.d];
-        else if (char === "?") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 3 : stack[stack.length-1] > 0 ? 1 : 0)) % 4;
+        else if (char === "R") ip.d = (ip.d + 1) % 4;
+        else if (char === "T") ip.d = (ip.d + 2) % 4;
+        else if (char === "L") ip.d = (ip.d + 3) % 4;
         else if (char === "U") ip.d = (ip.d + 3) % 4, state = "rotate-l";
         else if (char === "u") ip.d = (ip.d + 1) % 4, state = "rotate-r";
         else if (char === "W") ip.d = (ip.d + 3) % 4, state = "rotate-r";
         else if (char === "w") ip.d = (ip.d + 1) % 4, state = "rotate-l";
-        else if (char === ";") stack.pop();
-        else if (char === ":") stack.push(stack[stack.length-1]||0);
+        else if (char === "$") state = "skip";
+        else if (char === "@") return stop("Program finished.");
+        
+        else if (char === "?") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 3 : stack[stack.length-1] > 0 ? 1 : 0)) % 4;
+        else if (char === "!") if (stack.length && stack[stack.length-1]) state = "skip";
+        
         else if (char === "+") stack.push((stack[stack.length-2]||0)+(stack[stack.length-1]||0));
         else if (char === "-") stack.push((stack[stack.length-2]||0)-(stack[stack.length-1]||0));
         else if (char === "*") stack.push((stack[stack.length-2]||0)*(stack[stack.length-1]||0));
         else if (char === ",") stack.push((stack[stack.length-2]||0)/(stack[stack.length-1]||0)|0);
         else if (char === "%") stack.push((stack[stack.length-2]||0)%(stack[stack.length-1]||0));
+        else if (char === "a") stack.push((stack[stack.length-2]||0)&(stack[stack.length-1]||0));
+        else if (char === "b") stack.push((stack[stack.length-2]||0)|(stack[stack.length-1]||0));
+        else if (char === "c") stack.push((stack[stack.length-2]||0)^(stack[stack.length-1]||0));
+        
         else if (char === "(") stack.push((stack.pop()||0)-1);
         else if (char === ")") stack.push((stack.pop()||0)+1);
-        else if (char === "N") stack.push(10);
-        else if (char === "Q") stack.push(34);
-        else if (char === "S") stack.push(32);
-        else if (char === "$") state = "skip";
-        else if (char === "!") if (stack.length && stack[stack.length-1]) state = "skip";
+        else if (char === "n") stack.push(-(stack.pop()||0));
+        else if (char === "~") stack.push(~(stack.pop()||0));
+        
         
         if (ip.d === 0) {
             ip.x++;
