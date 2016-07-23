@@ -67,7 +67,6 @@ function run() {
         else if (char === "S") stack.push(32);
         else if (char === "'") state = "char";
         else if (char === '"') state = "string";
-        else if (char === "u") alert(ip.d), ip.d = (ip.d + 1) % 4, alert(ip.d), state = "rotate-r";
         
         else if (char === "&") stack.push(+[stack.pop()||"0",stack.pop()||""].reverse().join(""));
         else if (char === "#") stack.push(stack.length);
@@ -76,7 +75,7 @@ function run() {
         else if (char === "s") stack.push((stack.pop()||0), (stack.pop()||0));
         else if (char === "r") stack.push.apply(stack, stack.splice(-3, 2));
         else if (char === "q") stack.unshift((stack.pop()||0));
-        else if (char === "t") if(stack.length) stack.push(stack.splice(~stack.pop(), 1)[0]);
+        else if (char === "t") { if(stack.length) stack.push(stack.splice(~stack.pop(), 1)[0]); }
         
         else if (char === "o") document.getElementById("output").value += String.fromCharCode(stack[stack.length-1]);
         else if (char === "O") document.getElementById("output").value += stack[stack.length-1] || 0;
@@ -96,6 +95,7 @@ function run() {
         else if (char === "T") ip.d = (ip.d + 2) % 4;
         else if (char === "L") ip.d = (ip.d + 3) % 4;
         else if (char === "U") ip.d = (ip.d + 3) % 4, state = "rotate-l";
+        else if (char === "u") ip.d = (ip.d + 1) % 4, state = "rotate-r";
         else if (char === "W") ip.d = (ip.d + 3) % 4, state = "rotate-r";
         else if (char === "w") ip.d = (ip.d + 1) % 4, state = "rotate-l";
         else if (char === "$") state = "skip";
