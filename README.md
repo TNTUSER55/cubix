@@ -1,6 +1,6 @@
 # cubix
 
-A 2D esoteric language wrapped around the faces of a cube. [Temporary online interpreter](https://jsfiddle.net/vvc4dgvq/10/), [Code design helper](https://jsfiddle.net/vihanb/w5p8p2ms/26/embedded/result/)
+A 2D esoteric language wrapped around the faces of a cube. [Online interpreter](https://ethproductions.github.io/cubix), [Code design helper](https://jsfiddle.net/vihanb/w5p8p2ms/26/embedded/result/)
 
 ## Basics
 
@@ -20,7 +20,7 @@ is exactly the same as this one:
           . . .
           . . .
 
-Then the code is run like a 2-dimensional language, except that the IP (instruction pointer) wraps around like the code is on a cub.e
+Then the code is run like a 2-dimensional language, except that the IP (instruction pointer) wraps around like the code is on a cube.
 
 ## Commands
 
