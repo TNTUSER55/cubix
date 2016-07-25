@@ -52,6 +52,16 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 - `b` - take bitwise OR of the top two items.
 - `c` - take bitwise XOR of the top two items.
 
+### Stack manipulation
+
+- `:` - duplicate the top item.
+- `;` - pop/discard the top item.
+- `#` - push the stack length.
+- `s` - swap the top two items. `[... 1 2] => [... 2 1]`
+- `r` - rotate the top three items. `[... 0 1 2] => [... 2 0 1]`
+- `q` - send the top item to the bottom.
+- `t` - pop X, bring the Xth item to the top.
+
 ### Literals
 
 - `0-9` - push that digit.
@@ -73,23 +83,44 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 - `v` - point the IP south.
 - `<` - point the IP west.
 - `^` - point the IP north.
-- `L` - turn the IP left.
-- `R` - turn the IP right.
-- `U` - turn the IP left, then left again before executing the next instruction.
-- `u` - turn the IP right, then right again before executing the next instruction.
-- `W` - turn the IP left, then right before executing the next instruction.
-- `w` - turn the IP right, then left before executing the next instruction.
+- `L` - turn the IP left (90° counter-clockwise).
+- `R` - turn the IP right (90° clockwise).
+- `U` - "U-turn" the IP to the left (90° counter-clockwise twice).
+- `u` - "U-turn" the IP to the right (90° clockwise twice).
+- `W` - "sidestep" the IP to the left (90° counter-clockwise) before continuing on in the original direction.
+- `w` - "sidestep" the IP to the right (90° clockwise) before continuing on in the original direction.
 - `$` - skip the next instruction.
 - `!` - if the top item is truthy, skip the next instruction.
 - `?` - if the top item is less than zero, turn left; if it's more than zero, turn right; otherwise, continue straight.
 - `@` - end the program.
 
-### Stack manipulation
+## Example programs
 
-- `:` - duplicate the top item.
-- `;` - pop/discard the top item.
-- `#` - push the stack length.
-- `s` - swap the top two items. `[... 1 2] => [... 2 1]`
-- `r` - rotate the top three items. `[... 0 1 2] => [... 2 0 1]`
-- `q` - send the top item to the bottom.
-- `t` - pop X, bring the Xth item to the top.
+### Hello, World!
+
+    ./v.o;@?/"!dlroW"S',u/"Hello"
+
+Obviously no input is needed. Net form:
+
+          . / v
+          . o ;
+          @ ? /
+    " ! d l r o W " S ' , u
+    / " H e l l o " . . . .
+    . . . . . . . . . . . .
+          . . .
+          . . .
+          . . .
+
+### Primality test
+
+    %@\?I:u;>O/)((./0\)?/
+
+Input is just the number to test. Net form:
+    
+        % @
+        \ ?
+    I : u ; > O / )
+    ( ( . / 0 \ ) ?
+        / .
+        . .
