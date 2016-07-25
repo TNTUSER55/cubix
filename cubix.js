@@ -102,7 +102,7 @@ function run() {
         else if (char === "@") return stop("Program finished.");
         
         else if (char === "?") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 3 : stack[stack.length-1] > 0 ? 1 : 0)) % 4;
-        else if (char === "!") if (stack.length && stack[stack.length-1]) state = "skip";
+        else if (char === "!") { if (stack.length && stack[stack.length-1]) state = "skip"; }
         
         else if (char === "+") stack.push((stack[stack.length-2]||0)+(stack[stack.length-1]||0));
         else if (char === "-") stack.push((stack[stack.length-2]||0)-(stack[stack.length-1]||0));
