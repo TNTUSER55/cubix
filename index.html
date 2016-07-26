@@ -21,6 +21,16 @@
 		<br>
 		<button id="golf" onclick="golf()">Shorten</button>
 		<button id="cube" onclick="cube()">Cubify</button>
+		&nbsp;Preset:&nbsp;<select id="select" onchange="$('input').value=this.value.split('`')[0];$('code').value=this.value.split('`')[1];">
+			<option value="`./v.o;@?/&quot;!dlroW&quot;S',u/&quot;Hello&quot;">Hello, World!</option>
+			<option value="13`%@\?I:u;>O/)((./0\)?/">Primality test</option>
+			<option value="`......">Blank 1-cube</option>
+			<option value="`........................">Blank 2-cube</option>
+			<option value="`......................................................">Blank 3-cube</option>
+			<option value="`................................................................................................">Blank 4-cube</option>
+			<option value="`@'dOu">Longer integer</option>
+			<option value="`>..(NU@?O/">Double-length output</option>
+		</select>
 		<br>
 		<textarea id="input" rows=2 cols=50 placeholder="Input"></textarea>
 		<br>
