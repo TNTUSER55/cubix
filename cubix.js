@@ -228,7 +228,7 @@ function run() {
             paused = true;
             console.log("Program paused.");
             $("pause").innerHTML = "Resume";
-            clearInterval(update);
+            clearInterval(interval);
         }
     }
     
@@ -242,4 +242,5 @@ function stop(m) {
     $("run").innerHTML = "Run";
     $("stop").disabled = true;
     $("pause").disabled = true;
+    $("pause").innerHTML = "Pause";
 }
