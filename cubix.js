@@ -12,7 +12,7 @@ function cube() {
     var result = "",
         i = 0,
         j = 0,
-        char = 0;
+        c = 0;
         
     for (i = 0; i < size; i++) {
         result += "  ".repeat(size);
