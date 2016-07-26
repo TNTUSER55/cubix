@@ -96,6 +96,8 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 
 ## Example programs
 
+All of these programs and more can be found in the interpreter itself.
+
 ### Hello, World!
 
     ./v.o;@?/"!dlroW"S',u/"Hello"
@@ -124,3 +126,23 @@ Input is just the number to test. Net form:
     ( ( . / 0 \ ) ?
         / .
         . .
+
+### `cat`
+
+    @_i?o
+
+Input the string to be output. Net form:
+
+      @
+    _ i ? o
+      .
+
+### Truth machine
+
+    !I\@O
+
+Input `0` or `1`. Net form:
+
+      !
+    I \ @ O
+      .
