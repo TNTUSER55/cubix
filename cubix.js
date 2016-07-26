@@ -1,8 +1,50 @@
+String.prototype.repeat||(String.prototype.repeat=function(t){"use strict";if(null==this)throw new TypeError("can't convert "+this+" to object");var r=""+this;if(t=+t,t!=t&&(t=0),0>t)throw new RangeError("repeat count must be non-negative");if(t==1/0)throw new RangeError("repeat count must be less than infinity");if(t=Math.floor(t),0==r.length||0==t)return"";if(r.length*t>=1<<28)throw new RangeError("repeat count must not overflow maximum string size");for(var e="";1==(1&t)&&(e+=r),t>>>=1,0!=t;)r+=r;return e});
+function $(id){return document.getElementById(id)}
+
+function golf() {
+    $("code").value = $("code").value.replace(/\s/g, "").replace(/\.+$/, "");
+}
+
+function cube() {
+    var code = $("code").value.replace(/\s/g,"");
+    var size = Math.ceil(Math.sqrt(code.length / 6));
+    while (code.length < size * size * 6) code += ".";
+    var result = "",
+        i = 0,
+        j = 0,
+        char = 0;
+        
+    for (i = 0; i < size; i++) {
+        result += "  ".repeat(size);
+        for (j = 0; j < size; j++, c++) {
+            result += code[c] + " ";
+        }
+        result = result.replace(/ $/, "\n");
+    }
+    
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size * 4; j++, c++) {
+            result += code[c] + " ";
+        }
+        result = result.replace(/ $/, "\n");
+    }
+    
+    for (i = 0; i < size; i++) {
+        result += "  ".repeat(size);
+        for (j = 0; j < size; j++, c++) {
+            result += code[c] + " ";
+        }
+        result = result.replace(/ $/, "\n");
+    }
+    
+    $("code").value = result;
+}
+
 var interval = -1;
 
 function run() {
-    document.getElementById("output").value = "";
-    var code = document.getElementById("code").value.replace(/\s/g,"");
+    $("output").value = "";
+    var code = $("code").value.replace(/\s/g,"");
     var size = Math.ceil(Math.sqrt(code.length / 6));
     while (code.length < size * size * 6) code += ".";
     var board = [];
@@ -49,11 +91,11 @@ function run() {
         x: 0,
         y: 0,
         d: 0
-    }, state = "", stack = [], input = document.getElementById("input").value;
+    }, state = "", stack = [], input = $("input").value;
     
     function update() {
         var char = board[ip.f][ip.y][ip.x];
-        document.getElementById("debug").checked&&console.log("face:",ip.f,"x:",ip.x,"y:",ip.y,"dir:","ESWN"[ip.d],"char:",char,"stack:",stack.slice(),"state:",state);
+        $("debug").checked && console.log("face:",ip.f,"x:",ip.x,"y:",ip.y,"dir:","ESWN"[ip.d],"char:",char,"stack:",stack.slice(),"state:",state);
         if (state === "rotate-l") ip.d = (ip.d + 3) % 4, state = "";
         else if (state === "rotate-r") ip.d = (ip.d + 1) % 4, state = "";
         
@@ -77,8 +119,8 @@ function run() {
         else if (char === "q") stack.unshift((stack.pop()||0));
         else if (char === "t") { if(stack.length) stack.push(stack.splice(~stack.pop(), 1)[0]); }
         
-        else if (char === "o") document.getElementById("output").value += String.fromCharCode(stack[stack.length-1]);
-        else if (char === "O") document.getElementById("output").value += stack[stack.length-1] || 0;
+        else if (char === "o") $("output").value += String.fromCharCode(stack[stack.length-1]);
+        else if (char === "O") $("output").value += stack[stack.length-1] || 0;
         else if (char === "i") stack.push(input ? input.charCodeAt(0): -1), input = input.slice(1);
         else if (char === "A") { stack.push(-1); for (var i = input.length; i-- > 0; ) stack.push(input.charCodeAt(i)); input = ""; }
         else if (char === "I") stack.push(+(input.match(/-?\d+/)||[-1])[0] || 0), input = input.replace(/^.*?\d+/,"");
@@ -169,8 +211,8 @@ function run() {
         }
     }
     
-    document.getElementById("run").disabled = true;
-    document.getElementById("run").innerHTML = "Running...";
+    $("run").disabled = true;
+    $("run").innerHTML = "Running...";
     
     interval = setInterval(update,50);
 }
@@ -178,6 +220,6 @@ function run() {
 function stop(m) {
     clearInterval(interval);
     console.log(m);
-    document.getElementById("run").disabled = false;
-    document.getElementById("run").innerHTML = "Run";
+    $("run").disabled = false;
+    $("run").innerHTML = "Run";
 }
