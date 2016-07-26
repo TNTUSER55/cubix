@@ -40,7 +40,8 @@ function cube() {
     $("code").value = result;
 }
 
-var interval = -1;
+var interval = -1,
+    pause = function pause(){};
 
 function run() {
     $("output").value = "";
@@ -213,6 +214,23 @@ function run() {
     
     $("run").disabled = true;
     $("run").innerHTML = "Running...";
+    $("stop").disabled = false;
+    $("pause").disabled = false;
+    var paused = false;
+    
+    pause = function pause() {
+        if (paused) {
+            paused = false;
+            $("pause").innerHTML = "Pause";
+            console.log("Program resumed.");
+            interval = setInterval(update,50);
+        } else {
+            paused = true;
+            console.log("Program paused.");
+            $("pause").innerHTML = "Resume";
+            clearInterval(update);
+        }
+    }
     
     interval = setInterval(update,50);
 }
@@ -222,4 +240,6 @@ function stop(m) {
     console.log(m);
     $("run").disabled = false;
     $("run").innerHTML = "Run";
+    $("stop").disabled = true;
+    $("pause").disabled = true;
 }
