@@ -232,7 +232,11 @@ function run() {
         }
     }
     
-    interval = setInterval(update,50);
+    var iters = 0;
+    interval = setInterval(function () {
+        iters += $("speed").value / 20;
+        while (iters-- >= 1) update();
+    }, 50);
 }
 
 function stop(m) {
