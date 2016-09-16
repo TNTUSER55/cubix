@@ -49,14 +49,19 @@
 		<p>More here soon.</p>
 		<script>
 			var args = location.search.match(/[&?](c(?:ode)?|i(?:nput)?)=[^&]*/g);
+			var code, input;
 			if(args) for(var i = 0; i < args.length; ++i) {
 				var item = args[i];
 				var tmp = atob(item.slice(item.indexOf('=') + 1));
 				if(/^.c/i.test(i))
-					document.getElementById("code").value = tmp;
+					code = tmp;
 				else if(/^.i/i.test(i))
-					document.getElementById("input").value = tmp;
+					input = tmp;
 			}
+			setTimeout(function () {
+				if (typeof code !== "undefined") document.getElementById("code").value = code;
+				if (typeof input !== "undefined") document.getElementById("input").value = input;
+			}, 100);
 		</script>
 	</body>
 </html>
