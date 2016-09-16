@@ -218,12 +218,20 @@ function run() {
     $("pause").disabled = false;
     var paused = false;
     
+    var iters = 0;
+    function start() {
+        interval = setInterval(function () {
+            iters += $("speed").value / 20;
+            while (iters >= 1) --iters, update();
+        }, 50);
+    }
+    
     pause = function pause() {
         if (paused) {
             paused = false;
             $("pause").innerHTML = "Pause";
             console.log("Program resumed.");
-            interval = setInterval(update,50);
+            start();
         } else {
             paused = true;
             console.log("Program paused.");
@@ -231,12 +239,7 @@ function run() {
             clearInterval(interval);
         }
     }
-    
-    var iters = 0;
-    interval = setInterval(function () {
-        iters += $("speed").value / 20;
-        while (iters-- >= 1) update();
-    }, 50);
+    start();
 }
 
 function stop(m) {
