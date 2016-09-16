@@ -51,7 +51,9 @@
 			var args = location.search.match(/[&?](c(?:ode)?|i(?:nput)?)=([^&]|&(?!(code|input)=))*/g);
 			if(args) for(var i = 0; i < args.length; ++i) {
 				var item = args[i];
-				var tmp = atob(item.slice(item.indexOf('=') + 1));
+				var tmp = item.slice(item.indexOf('=') + 1);
+				alert(tmp);
+				tmp = atob(tmp);
 				if(/^.c/i.test(i))
 					document.getElementById("code").value = tmp;
 				else if(/^.i/i.test(i))
