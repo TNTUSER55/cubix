@@ -53,15 +53,16 @@
 			if(args) for(var i = 0; i < args.length; ++i) {
 				var item = args[i];
 				var tmp = atob(item.slice(item.indexOf('=') + 1));
-				if(/^.c/i.test(i))
-					code = tmp;
-				else if(/^.i/i.test(i))
-					input = tmp;
+				if(/^.c/i.test(item))
+					document.getElementById("code").value = tmp;
+				else if(/^.i/i.test(item))
+					document.getElementById("input").value = tmp;
 			}
+			/*
 			setTimeout(function () {
 				if (typeof code !== "undefined") document.getElementById("code").value = code;
 				if (typeof input !== "undefined") document.getElementById("input").value = input;
-			}, 100);
+			}, 100);*/
 		</script>
 	</body>
 </html>
