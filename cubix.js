@@ -5,9 +5,9 @@ function golf() {
     $("code").value = $("code").value.replace(/\s/g, "").replace(/\.+$/, "");
 }
 
-function cube() {
-    var code = $("code").value.replace(/\s/g,"");
-    var size = Math.ceil(Math.sqrt(code.length / 6));
+function cubify(code) {
+    code = code.replace(/\s/g,"");
+    var size = Math.ceil(Math.sqrt(code.length / 6)) || 1;
     while (code.length < size * size * 6) code += ".";
     var result = "",
         i = 0,
@@ -37,16 +37,58 @@ function cube() {
         result = result.replace(/ $/, "\n");
     }
     
-    $("code").value = result;
+    return result;
+}
+
+function cube() {
+    $("code").value = cubify($("code").value);
+}
+
+function net() {
+    var code = $("code").value.replace(/\s/g,"");
+    var size = Math.ceil(Math.sqrt(code.length / 6)) || 1;
+    while (code.length < size * size * 6) code += ".";
+    var result = "",
+        i = 0,
+        j = 0,
+        c = 0;
+        
+    for (i = 0; i < size; i++) {
+        result += "<span style='padding-left:5px;padding-right:5px;'> </span>".repeat(size);
+        for (j = 0; j < size; j++, c++) {
+            result += "<span style='padding-left:5px;padding-right:5px;' id='char-0-" + i + "-" + j + "'>" + code[c] + "</span>";
+        }
+        result += "<br>";
+    }
+    
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size * 4; j++, c++) {
+            result += "<span style='padding-left:5px;padding-right:5px;' id='char-" + (j / size + 1 | 0) + "-" + i + "-" + (j % size) + "'>" + code[c] + "</span>";
+        }
+        result += "<br>";
+    }
+    
+    for (i = 0; i < size; i++) {
+        result += "<span style='padding-left:5px;padding-right:5px;'> </span>".repeat(size);
+        for (j = 0; j < size; j++, c++) {
+            result += "<span style='padding-left:5px;padding-right:5px;' id='char-5-" + i + "-" + j + "'>" + code[c] + "</span>";
+        }
+        result += "<br>";
+    }
+    
+    result += "<br><br>Stack: <span id='stack'>empty</span>"
+    
+    $("net").innerHTML = result;
 }
 
 var interval = -1,
-    pause = function pause(){};
+    pause = function pause(){},
+    netchar = "";
 
 function run() {
     $("output").value = "";
     var code = $("code").value.replace(/\s/g,"");
-    var size = Math.ceil(Math.sqrt(code.length / 6));
+    var size = Math.ceil(Math.sqrt(code.length / 6)) || 1;
     while (code.length < size * size * 6) code += ".";
     var board = [];
     var i = 0,
@@ -94,9 +136,20 @@ function run() {
         d: 0
     }, state = "", stack = [], input = $("input").value;
     
+    if($(netchar)) $(netchar).className = "";
+    netchar = "";
+    
+    function moveIP() {
+        if($(netchar)) $(netchar).className = "";
+        netchar = "char-" + ip.f + "-" + ip.y + "-" + ip.x;
+        if($(netchar)) $(netchar).className = "arrow-" + "ESWN"[ip.d];
+        $('stack').innerHTML = stack.join() || "empty";
+    }
+    
     function update() {
         var char = board[ip.f][ip.y][ip.x];
-        $("debug").checked && console.log("face:",ip.f,"x:",ip.x,"y:",ip.y,"dir:","ESWN"[ip.d],"char:",char,"stack:",stack.slice(),"state:",state);
+        $("debug").checked && console.log("face:", ip.f, "x:", ip.x, "y:", ip.y, "dir:", "ESWN"[ip.d], "char:", char, "stack:", stack.slice(), "state:", state);
+        
         if (state === "rotate-l") ip.d = (ip.d + 3) % 4, state = "";
         else if (state === "rotate-r") ip.d = (ip.d + 1) % 4, state = "";
         
@@ -142,7 +195,7 @@ function run() {
         else if (char === "W") ip.d = (ip.d + 3) % 4, state = "rotate-r";
         else if (char === "w") ip.d = (ip.d + 1) % 4, state = "rotate-l";
         else if (char === "$") state = "skip";
-        else if (char === "@") return stop("Program finished.");
+        else if (char === "@") return void (moveIP(), stop("Program finished."));
         
         else if (char === "?") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 3 : stack[stack.length-1] > 0 ? 1 : 0)) % 4;
         else if (char === "!") { if (stack.length && stack[stack.length-1]) state = "skip"; }
@@ -161,6 +214,7 @@ function run() {
         else if (char === "n") stack.push(-(stack.pop()||0));
         else if (char === "~") stack.push(~(stack.pop()||0));
         
+        moveIP();
         
         if (ip.d === 0) {
             ip.x++;
@@ -251,3 +305,5 @@ function stop(m) {
     $("pause").disabled = true;
     $("pause").innerHTML = "Pause";
 }
+
+

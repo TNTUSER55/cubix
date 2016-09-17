@@ -10,18 +10,31 @@
 				font-family: "Source Sans Pro", sans-serif;
 			}
 			
-			textarea {
+			textarea, pre, span {
 				font-family: "Source Code Pro", monospace;
 				font-size: 14px;
 			}
+            
+            .arrow-N {
+                background-image: url("img/ip-n.png");
+            }
+            .arrow-S {
+                background-image: url("img/ip-s.png");
+            }
+            .arrow-E {
+                background-image: url("img/ip-e.png");
+            }
+            .arrow-W {
+                background-image: url("img/ip-w.png");
+            }
 		</style>
 	</head>
 	<body>
-		<textarea id="code" rows=5 cols=50 placeholder="Code">./v.o;@?/"!dlroW"S',u/"Hello"</textarea>
+		<textarea id="code" rows=5 cols=50 placeholder="Code" oninput="net()">./v.o;@?/"!dlroW"S',u/"Hello"</textarea>
 		<br>
 		<button id="golf" onclick="golf()">Shorten</button>
 		<button id="cube" onclick="cube()">Cubify</button>
-		&nbsp;Preset:&nbsp;<select id="select" onchange="$('input').value=this.value.split('`')[0];$('code').value=this.value.split('`')[1];">
+		&nbsp;Preset:&nbsp;<select id="select" onchange="$('input').value=this.value.split('`')[0];$('code').value=this.value.split('`')[1];net();">
 			<option value="`./v.o;@?/&quot;!dlroW&quot;S',u/&quot;Hello&quot;">Hello, World!</option>
 			<option value="13`%@\?I:u;>O/)((./0\)?/">Primality test</option>
 			<option value="1`!I\@O">Truth machine</option>
@@ -47,6 +60,7 @@
 		<textarea id="output" rows=3 cols=50 placeholder="Output appears here."></textarea><br>
 		* Sends debug info to browser console.
 		<p>More here soon.</p>
+		<pre id="net" style="position:absolute;top:100px;left:500px;"></pre>
 		<script>
 			var args = location.search.match(/[&?](c(?:ode)?|i(?:nput)?)=[^&]*/g);
 			var code, input;
@@ -58,6 +72,7 @@
 				else if(/^.i/i.test(item))
 					document.getElementById("input").value = tmp;
 			}
+            net();
 		</script>
 	</body>
 </html>
