@@ -60,17 +60,19 @@
 		<textarea id="output" rows=3 cols=50 placeholder="Output appears here."></textarea><br>
 		* Sends debug info to browser console.
 		<p>More here soon.</p>
-		<pre id="net" style="position:absolute;top:100px;left:500px;"></pre>
+		<pre id="net" style="position:absolute;top:100px;left:480px;"></pre>
 		<script>
-			var args = location.search.match(/[&?](c(?:ode)?|i(?:nput)?)=[^&]*/g);
+			var args = location.search.match(/[&?](c(?:ode)?|i(?:nput)?|s(?:peed)?)=[^&]*/g);
 			var code, input;
 			if(args) for(var i = 0; i < args.length; ++i) {
 				var item = args[i];
-				var tmp = atob(item.slice(item.indexOf('=') + 1));
+				var tmp = item.slice(item.indexOf('=') + 1);
 				if(/^.c/i.test(item))
-					document.getElementById("code").value = tmp;
+					document.getElementById("code").value = atob(tmp);
 				else if(/^.i/i.test(item))
-					document.getElementById("input").value = tmp;
+					document.getElementById("input").value = atob(tmp);
+				else if(/^.s/i.test(item))
+					document.getElementById("speed").value = Math.max(+tmp || 20, 0) || 1;
 			}
             net();
 		</script>
