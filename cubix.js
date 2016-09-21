@@ -173,7 +173,7 @@ function run() {
         else if (char === "q") stack.unshift((stack.pop()||0));
         else if (char === "t") { if(stack.length) stack.push(stack.splice(~stack.pop(), 1)[0]); }
         
-        else if (char === "o") $("output").value += String.fromCharCode(stack[stack.length-1]);
+        else if (char === "o") { if(stack[stack.length-1] >= 0) $("output").value += String.fromCharCode(stack[stack.length-1]); }
         else if (char === "O") $("output").value += stack[stack.length-1] || 0;
         else if (char === "i") stack.push(input ? input.charCodeAt(0): -1), input = input.slice(1);
         else if (char === "A") { stack.push(-1); for (var i = input.length; i-- > 0; ) stack.push(input.charCodeAt(i)); input = ""; }
