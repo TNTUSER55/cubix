@@ -190,6 +190,7 @@ function run() {
         else if (char === "R") ip.d = (ip.d + 1) % 4;
         else if (char === "T") ip.d = (ip.d + 2) % 4;
         else if (char === "L") ip.d = (ip.d + 3) % 4;
+        else if (char === "D") ip.d = Math.random() * 4 | 0;
         else if (char === "U") ip.d = (ip.d + 3) % 4, state = "rotate-l";
         else if (char === "u") ip.d = (ip.d + 1) % 4, state = "rotate-r";
         else if (char === "W") ip.d = (ip.d + 3) % 4, state = "rotate-r";
