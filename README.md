@@ -83,13 +83,13 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 - `v` - point the IP south.
 - `<` - point the IP west.
 - `^` - point the IP north.
+- `D` - point the IP in a random direction.
 - `L` - turn the IP left (90° counter-clockwise).
 - `R` - turn the IP right (90° clockwise).
 - `U` - "U-turn" the IP to the left (90° counter-clockwise twice).
 - `u` - "U-turn" the IP to the right (90° clockwise twice).
 - `W` - "sidestep" the IP to the left (90° counter-clockwise) before continuing on in the original direction.
 - `w` - "sidestep" the IP to the right (90° clockwise) before continuing on in the original direction.
-- `D` - turn the IP to a random direction
 - `$` - skip the next instruction.
 - `!` - if the top item is truthy, skip the next instruction.
 - `?` - if the top item is less than zero, turn left; if it's more than zero, turn right; otherwise, continue straight.
