@@ -89,6 +89,7 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 - `u` - "U-turn" the IP to the right (90° clockwise twice).
 - `W` - "sidestep" the IP to the left (90° counter-clockwise) before continuing on in the original direction.
 - `w` - "sidestep" the IP to the right (90° clockwise) before continuing on in the original direction.
+- `D` - turn the IP to a random direction
 - `$` - skip the next instruction.
 - `!` - if the top item is truthy, skip the next instruction.
 - `?` - if the top item is less than zero, turn left; if it's more than zero, turn right; otherwise, continue straight.
