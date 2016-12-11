@@ -56,12 +56,19 @@
 		<input type="checkbox" id="debug">Debug*
 		<br>
 		<textarea id="output" rows=3 cols=50 placeholder="Output appears here."></textarea><br>
-		* Sends debug info to browser console.
+		* Sends debug info to browser console.<br>
+		<button onclick="link()">Generate permalink</button>
 		<p>Upload an ISO-8859-1-encoded file:</p>
         <input id="text-file" type="file" onsubmit="document.getElementById('code').value=this.value" />
         <input id="submit" type="button" value="Submit" onclick="var fr=new FileReader();fr.onload=function(){document.getElementById('code').value=fr.result};fr.readAsBinaryString(document.getElementById('text-file').files[0])"></button>
 		<pre id="net" style="position:absolute;top:100px;left:480px;"></pre>
 		<script>
+			function link() {
+				window.history.pushState('', 'bytes - The all-in-one online byte counter',
+							 '/cubix/?code=' + btoa(document.getElementById('code').value)
+							 + '\&input=' + btoa(document.getElementById('input').value)
+							 + '\&speed=' + document.getElementById('speed').value);
+			}
 			var args = location.search.match(/[&?](c(?:ode)?|i(?:nput)?|s(?:peed)?)=[^&]*/g);
 			var code, input;
 			if(args) for(var i = 0; i < args.length; ++i) {
