@@ -50,7 +50,7 @@
 		<br>
 		Iterations per second: <input id="speed" type="number" step="any" min=1 value=20 max=100></input>
 		<br>
-		<button id="run" onclick="run()">Run</button>
+		<button id="run" onclick="Cubix.run($('code').value,$('input').value)">Run</button>
 		<button id="pause" onclick="pause()" disabled>Pause</button>
 		<button id="stop" onclick="stop('Program stopped manually.')" disabled>Stop</button>
 		<input type="checkbox" id="debug">Debug*
