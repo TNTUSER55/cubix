@@ -1,103 +1,119 @@
 String.prototype.repeat||(String.prototype.repeat=function(t){"use strict";if(null==this)throw new TypeError("can't convert "+this+" to object");var r=""+this;if(t=+t,t!=t&&(t=0),0>t)throw new RangeError("repeat count must be non-negative");if(t==1/0)throw new RangeError("repeat count must be less than infinity");if(t=Math.floor(t),0==r.length||0==t)return"";if(r.length*t>=1<<28)throw new RangeError("repeat count must not overflow maximum string size");for(var e="";1==(1&t)&&(e+=r),t>>>=1,0!=t;)r+=r;return e});
 function $(id){return document.getElementById(id)}
 
-function golf() {
-    $("code").value = $("code").value.replace(/\s/g, "").replace(/\.+$/, "");
+var isnode = typeof window === 'undefined';
+
+if (!isnode) {
+	function golf() {
+		$("code").value = $("code").value.replace(/\s/g, "").replace(/\.+$/, "");
+	}
+
+	function cubify(code) {
+		code = code.replace(/\s/g,"");
+		var size = Math.ceil(Math.sqrt(code.length / 6)) || 1;
+		while (code.length < size * size * 6) code += ".";
+		var result = "",
+			i = 0,
+			j = 0,
+			c = 0;
+
+		for (i = 0; i < size; i++) {
+			result += "  ".repeat(size);
+			for (j = 0; j < size; j++, c++) {
+				result += code[c] + " ";
+			}
+			result = result.replace(/ $/, "\n");
+		}
+
+		for (i = 0; i < size; i++) {
+			for (j = 0; j < size * 4; j++, c++) {
+				result += code[c] + " ";
+			}
+			result = result.replace(/ $/, "\n");
+		}
+
+		for (i = 0; i < size; i++) {
+			result += "  ".repeat(size);
+			for (j = 0; j < size; j++, c++) {
+				result += code[c] + " ";
+			}
+			result = result.replace(/ $/, "\n");
+		}
+
+		return result;
+	}
+
+	function cube() {
+		$("code").value = cubify($("code").value);
+	}
+
+	function net() {
+		var code = $("code").value.replace(/\s/g,"");
+		var size = Math.ceil(Math.sqrt(code.length / 6)) || 1;
+		while (code.length < size * size * 6) code += ".";
+		var result = "",
+			i = 0,
+			j = 0,
+			c = 0;
+
+		for (i = 0; i < size; i++) {
+			result += "<span style='padding-left:5px;padding-right:5px;'> </span>".repeat(size);
+			for (j = 0; j < size; j++, c++) {
+				result += "<span style='padding-left:5px;padding-right:5px;' id='char-0-" + i + "-" + j + "'>" + code[c] + "</span>";
+			}
+			result += "<br>";
+		}
+
+		for (i = 0; i < size; i++) {
+			for (j = 0; j < size * 4; j++, c++) {
+				result += "<span style='padding-left:5px;padding-right:5px;' id='char-" + (j / size + 1 | 0) + "-" + i + "-" + (j % size) + "'>" + code[c] + "</span>";
+			}
+			result += "<br>";
+		}
+
+		for (i = 0; i < size; i++) {
+			result += "<span style='padding-left:5px;padding-right:5px;'> </span>".repeat(size);
+			for (j = 0; j < size; j++, c++) {
+				result += "<span style='padding-left:5px;padding-right:5px;' id='char-5-" + i + "-" + j + "'>" + code[c] + "</span>";
+			}
+			result += "<br>";
+		}
+
+		result += "<br><br>Stack: <span id='stack'>empty</span>"
+
+		$("net").innerHTML = result;
+	}
+
+	var interval = -1,
+		pause = function pause(){},
+		netchar = "";
+
+	function stop(m) {
+		clearInterval(interval);
+		console.log(m);
+		$("run").disabled = false;
+		$("run").innerHTML = "Run";
+		$("stop").disabled = true;
+		$("pause").disabled = true;
+		$("pause").innerHTML = "Pause";
+	}
+} else {
+	var finished = false;
+	function stop() {
+		finished = true;
+	}
 }
 
-function cubify(code) {
-    code = code.replace(/\s/g,"");
-    var size = Math.ceil(Math.sqrt(code.length / 6)) || 1;
-    while (code.length < size * size * 6) code += ".";
-    var result = "",
-        i = 0,
-        j = 0,
-        c = 0;
-        
-    for (i = 0; i < size; i++) {
-        result += "  ".repeat(size);
-        for (j = 0; j < size; j++, c++) {
-            result += code[c] + " ";
-        }
-        result = result.replace(/ $/, "\n");
-    }
-    
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < size * 4; j++, c++) {
-            result += code[c] + " ";
-        }
-        result = result.replace(/ $/, "\n");
-    }
-    
-    for (i = 0; i < size; i++) {
-        result += "  ".repeat(size);
-        for (j = 0; j < size; j++, c++) {
-            result += code[c] + " ";
-        }
-        result = result.replace(/ $/, "\n");
-    }
-    
-    return result;
-}
-
-function cube() {
-    $("code").value = cubify($("code").value);
-}
-
-function net() {
-    var code = $("code").value.replace(/\s/g,"");
-    var size = Math.ceil(Math.sqrt(code.length / 6)) || 1;
-    while (code.length < size * size * 6) code += ".";
-    var result = "",
-        i = 0,
-        j = 0,
-        c = 0;
-        
-    for (i = 0; i < size; i++) {
-        result += "<span style='padding-left:5px;padding-right:5px;'> </span>".repeat(size);
-        for (j = 0; j < size; j++, c++) {
-            result += "<span style='padding-left:5px;padding-right:5px;' id='char-0-" + i + "-" + j + "'>" + code[c] + "</span>";
-        }
-        result += "<br>";
-    }
-    
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < size * 4; j++, c++) {
-            result += "<span style='padding-left:5px;padding-right:5px;' id='char-" + (j / size + 1 | 0) + "-" + i + "-" + (j % size) + "'>" + code[c] + "</span>";
-        }
-        result += "<br>";
-    }
-    
-    for (i = 0; i < size; i++) {
-        result += "<span style='padding-left:5px;padding-right:5px;'> </span>".repeat(size);
-        for (j = 0; j < size; j++, c++) {
-            result += "<span style='padding-left:5px;padding-right:5px;' id='char-5-" + i + "-" + j + "'>" + code[c] + "</span>";
-        }
-        result += "<br>";
-    }
-    
-    result += "<br><br>Stack: <span id='stack'>empty</span>"
-    
-    $("net").innerHTML = result;
-}
-
-var interval = -1,
-    pause = function pause(){},
-    netchar = "";
-
-function stop(m) {
-    clearInterval(interval);
-    console.log(m);
-    $("run").disabled = false;
-    $("run").innerHTML = "Run";
-    $("stop").disabled = true;
-    $("pause").disabled = true;
-    $("pause").innerHTML = "Pause";
+function output(str) {
+	if (isnode)
+		process.stdout.write(String(str));
+	else
+		$("output").value += str;
 }
 
 var Cubix = {
 	run: function run(code, input) {
-		$("output").value = "";
+		if (!isnode) $("output").value = "";
 		code = code.replace(/\s/g,"");
 		var size = Math.ceil(Math.sqrt(code.length / 6)) || 1;
 		while (code.length < size * size * 6) code += ".";
@@ -133,13 +149,7 @@ var Cubix = {
 				board[5][i] += code[c];
 			}
 		}
-
-		console.log(board.map(function(a) {
-			return a.map(function(b) {
-				return b.split("").join(" ")
-			}).join("\n")
-		}).join("\n\n"));
-
+		
 		var ip = {
 			f: 1,
 			x: 0,
@@ -147,19 +157,29 @@ var Cubix = {
 			d: 0
 		}, state = "", stack = [];
 
-		if($(netchar)) $(netchar).className = "";
-		netchar = "";
+		if (!isnode) {
+			console.log(board.map(function(a) {
+				return a.map(function(b) {
+					return b.split("").join(" ")
+				}).join("\n")
+			}).join("\n\n"));
 
-		function moveIP() {
 			if($(netchar)) $(netchar).className = "";
-			netchar = "char-" + ip.f + "-" + ip.y + "-" + ip.x;
-			if($(netchar)) $(netchar).className = "arrow-" + "ESWN"[ip.d];
-			$('stack').innerHTML = stack.join() || "empty";
+			netchar = "";
+
+			function moveIP() {
+				if($(netchar)) $(netchar).className = "";
+				netchar = "char-" + ip.f + "-" + ip.y + "-" + ip.x;
+				if($(netchar)) $(netchar).className = "arrow-" + "ESWN"[ip.d];
+				$('stack').innerHTML = stack.join() || "empty";
+			}
+		} else {
+			function moveIP() {}
 		}
 
 		function update() {
 			var char = board[ip.f][ip.y][ip.x];
-			$("debug").checked && console.log("face:", ip.f, "x:", ip.x, "y:", ip.y, "dir:", "ESWN"[ip.d], "char:", char, "stack:", stack.slice(), "state:", state);
+			if (!isnode && $("debug").checked) console.log("face:", ip.f, "x:", ip.x, "y:", ip.y, "dir:", "ESWN"[ip.d], "char:", char, "stack:", stack.slice(), "state:", state);
 
 			if (state === "rotate-l") ip.d = (ip.d + 3) % 4, state = "";
 			else if (state === "rotate-r") ip.d = (ip.d + 1) % 4, state = "";
@@ -184,11 +204,11 @@ var Cubix = {
 			else if (char === "q") stack.unshift((stack.pop()||0));
 			else if (char === "t") { if(stack.length) stack.push(stack.splice(~stack.pop(), 1)[0]); }
 
-			else if (char === "o") { if(stack[stack.length-1] >= 0) $("output").value += String.fromCharCode(stack[stack.length-1]); }
-			else if (char === "O") $("output").value += stack[stack.length-1] || 0;
+			else if (char === "o") { if(stack[stack.length-1] >= 0) output(String.fromCharCode(stack[stack.length-1])); }
+			else if (char === "O") output(stack[stack.length-1] || 0);
 			else if (char === "i") stack.push(input ? input.charCodeAt(0): -1), input = input.slice(1);
 			else if (char === "A") { stack.push(-1); for (var i = input.length; i-- > 0; ) stack.push(input.charCodeAt(i)); input = ""; }
-			else if (char === "I") stack.push(+(input.match(/-?\d+/)||[-1])[0] || 0), input = input.replace(/^.*?\d+/,"");
+			else if (char === "I") stack.push(+(input.match(/-?\d+/)||[0])[0] || 0), input = input.replace(/^.*?\d+/,"");
 
 			else if (char === ">") ip.d = 0;
 			else if (char === "v") ip.d = 1;
@@ -277,34 +297,42 @@ var Cubix = {
 					][ip.f];
 			}
 		}
+		
+		if (isnode) {
+			finished = false;
+			while (!finished)
+				update();
+		} else {
+			$("run").disabled = true;
+			$("run").innerHTML = "Running...";
+			$("stop").disabled = false;
+			$("pause").disabled = false;
+			var paused = false;
 
-		$("run").disabled = true;
-		$("run").innerHTML = "Running...";
-		$("stop").disabled = false;
-		$("pause").disabled = false;
-		var paused = false;
-
-		var iters = 0;
-		function start() {
-			interval = setInterval(function () {
-				iters += $("speed").value / 20;
-				while (iters >= 1) --iters, update();
-			}, 50);
-		}
-
-		pause = function pause() {
-			if (paused) {
-				paused = false;
-				$("pause").innerHTML = "Pause";
-				console.log("Program resumed.");
-				start();
-			} else {
-				paused = true;
-				console.log("Program paused.");
-				$("pause").innerHTML = "Resume";
-				clearInterval(interval);
+			var iters = 0;
+			function start() {
+				interval = setInterval(function () {
+					iters += $("speed").value / 20;
+					while (iters >= 1) --iters, update();
+				}, 50);
 			}
+
+			pause = function pause() {
+				if (paused) {
+					paused = false;
+					$("pause").innerHTML = "Pause";
+					console.log("Program resumed.");
+					start();
+				} else {
+					paused = true;
+					console.log("Program paused.");
+					$("pause").innerHTML = "Resume";
+					clearInterval(interval);
+				}
+			}
+			start();
 		}
-		start();
 	}
 };
+
+if (isnode) module.exports = Cubix;
