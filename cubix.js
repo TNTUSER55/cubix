@@ -86,6 +86,7 @@ if (!isnode) {
 
 	var interval = -1,
 		pause = function pause(){},
+		update = function update(){},
 		netchar = "";
 
 	function stop(m) {
@@ -94,6 +95,7 @@ if (!isnode) {
 		$("run").disabled = false;
 		$("run").innerHTML = "Run";
 		$("stop").disabled = true;
+		$("step").disabled = true;
 		$("pause").disabled = true;
 		$("pause").innerHTML = "Pause";
 	}
@@ -177,7 +179,7 @@ var Cubix = {
 			function moveIP() {}
 		}
 
-		function update() {
+		update = function update() {
 			var char = board[ip.f][ip.y][ip.x];
 			if (!isnode && $("debug").checked) console.log("face:", ip.f, "x:", ip.x, "y:", ip.y, "dir:", "ESWN"[ip.d], "char:", char, "stack:", stack.slice(), "state:", state);
 
@@ -305,6 +307,7 @@ var Cubix = {
 		} else {
 			$("run").disabled = true;
 			$("run").innerHTML = "Running...";
+			$("step").disabled = true;
 			$("stop").disabled = false;
 			$("pause").disabled = false;
 			var paused = false;
@@ -320,12 +323,14 @@ var Cubix = {
 			pause = function pause() {
 				if (paused) {
 					paused = false;
+					$("step").disabled = true;
 					$("pause").innerHTML = "Pause";
 					console.log("Program resumed.");
 					start();
 				} else {
 					paused = true;
 					console.log("Program paused.");
+					$("step").disabled = false;
 					$("pause").innerHTML = "Resume";
 					clearInterval(interval);
 				}
