@@ -95,7 +95,7 @@ if (!isnode) {
 		$("run").disabled = false;
 		$("run").innerHTML = "Run";
 		$("stop").disabled = true;
-		$("step").disabled = true;
+		$("step").disabled = false;
 		$("pause").disabled = true;
 		$("pause").innerHTML = "Pause";
 	}
