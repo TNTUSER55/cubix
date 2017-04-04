@@ -206,7 +206,7 @@ var Cubix = {
 			else if (char === "q") stack.unshift((stack.pop()||0));
 			else if (char === "p") stack.push(stack.shift()||0);
 			else if (char === "B") stack.reverse();
-			else if (char === "t") { if(stack.length) stack.push(stack.splice(~stack.pop(), 1)[0]); }
+			else if (char === "t") { if(stack.length) stack.push(stack.splice(~stack.pop(), 1)[0]||0); }
 
 			else if (char === "o") { if(stack[stack.length-1] >= 0) output(String.fromCharCode(stack[stack.length-1])); }
 			else if (char === "O") output(stack[stack.length-1] || 0);
