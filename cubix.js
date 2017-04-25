@@ -113,6 +113,12 @@ function output(str) {
 		$("output").value += str;
 }
 
+function trunc(num) {
+	if (isNaN(num)) return NaN;
+	if (num < 0) return Math.ceil(num);
+	return Math.floor(num);
+}
+
 var Cubix = {
 	run: function run(code, input) {
 		if (!isnode) $("output").value = "";
@@ -239,7 +245,7 @@ var Cubix = {
 			else if (char === "+") stack.push((stack[stack.length-2]||0)+(stack[stack.length-1]||0));
 			else if (char === "-") stack.push((stack[stack.length-2]||0)-(stack[stack.length-1]||0));
 			else if (char === "*") stack.push((stack[stack.length-2]||0)*(stack[stack.length-1]||0));
-			else if (char === ",") stack.push((stack[stack.length-2]||0)/(stack[stack.length-1]||0)|0);
+			else if (char === ",") stack.push(trunc((stack[stack.length-2]||0)/(stack[stack.length-1]||0))||0);
 			else if (char === "%") stack.push((stack[stack.length-2]||0)%(stack[stack.length-1]||0));
 			else if (char === "a") stack.push((stack[stack.length-2]||0)&(stack[stack.length-1]||0));
 			else if (char === "b") stack.push((stack[stack.length-2]||0)|(stack[stack.length-1]||0));
