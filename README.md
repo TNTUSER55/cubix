@@ -106,6 +106,8 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 - `±` - go forward one square and turn south
 - `²` - go forward one square and turn east
 - `³` - go forward one square and turn west
+- `µ` - if the top item is zero, turn right 
+- `¶` - if the top item is zero, turn left
 
 Hello avery
 
