@@ -94,7 +94,7 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 - `$` - skip the next instruction.
 - `!` - if the top item is truthy, skip the next instruction.
 - `?` - if the top item is less than zero, turn left; if it's more than zero, turn right; otherwise, continue straight.
-- `C` - if the top item is greater then zer, turn left; if it's less than zero, turn right; otherwise, continue straight
+- `C` - if the top item is greater then zero, turn left; if it's less than zero, turn right; otherwise, continue straight
 - `@` - end the program.
 
 ## Example programs
