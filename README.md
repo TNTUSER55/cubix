@@ -96,10 +96,16 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 - `?` - if the top item is less than zero, turn left; if it's more than zero, turn right; otherwise, continue straight.
 - `C` - if the top item is greater then zero, turn left; if it's less than zero, turn right; otherwise, continue straight
 - `@` - end the program.
-- `©` - if the top item is less than zero, continue straight; if the top item is more, turn left; otherwise, straight
-- `ª` - if the top item is less than zero, continue straight; if the top item is more, turn right; otherwise, straight
-- `«` - if the top item is less than zero, turn left; if the top item is more, continue straight; otherwise, straight
-- `¬` - if the top item is less than zero, turn right; if the top item is more, continue straight; otherwise, straight
+- `©` - if the top item is less than zero, continue straight; if the top item is more than zero, turn left; otherwise, straight
+- `ª` - if the top item is less than zero, continue straight; if the top item is more than zero, turn right; otherwise, straight
+- `«` - if the top item is less than zero, turn left; if the top item is more than zero, continue straight; otherwise, straight
+- `¬` - if the top item is less than zero, turn right; if the top item is more than zero, continue straight; otherwise, straight
+- `®` - go forward one square and turn right
+- `¯` - go forward one square and turn left
+
+
+
+
 
 ## Example programs
 
