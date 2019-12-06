@@ -191,6 +191,10 @@ var Cubix = {
 
 			if (state === "rotate-l") ip.d = (ip.d + 3) % 4, state = "";
 			else if (state === "rotate-r") ip.d = (ip.d + 1) % 4, state = "";
+			if (state === "north") ip.d = 3, state = "";
+			if (state === "south") ip.d = 1, state = "";
+			if (state === "east") ip.d = 0, state = "";
+			if (state === "west") ip.d = 2, state = "";
 
 			if (state === "skip") state = "";
 			else if (state === "char") stack.push(char.charCodeAt(0)), state = "";
@@ -247,7 +251,11 @@ var Cubix = {
 			else if (char === "«") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 3 : stack[stack.length-1] > 0 ? 0 : 0)) % 4;
 			else if (char === "¬") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 1 : stack[stack.length-1] > 0 ? 0 : 0)) % 4;
 			else if (char === "®") ip.d = (ip.d) , state = "rotate-r";
-			else if (char === "®") ip.d = (ip.d) , state = "rotate-l";
+			else if (char === "¯") ip.d = (ip.d) , state = "rotate-l";
+			else if (char === "°") ip.d = (ip.d) , state = "north";
+			else if (char === "±") ip.d = (ip.d) , state = "south";
+			else if (char === "²") ip.d = (ip.d) , state = "east";
+			else if (char === "³") ip.d = (ip.d) , state = "west";
 
 			else if (char === "+") stack.push((stack[stack.length-2]||0)+(stack[stack.length-1]||0));
 			else if (char === "-") stack.push((stack[stack.length-2]||0)-(stack[stack.length-1]||0));
