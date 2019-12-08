@@ -191,10 +191,6 @@ var Cubix = {
 
 			if (state === "rotate-l") ip.d = (ip.d + 3) % 4, state = "";
 			else if (state === "rotate-r") ip.d = (ip.d + 1) % 4, state = "";
-			else if (state === "north") ip.d = 3, state = "";
-			else if (state === "south") ip.d = 1, state = "";
-			else if (state === "east") ip.d = 0, state = "";
-			else if (state === "west") ip.d = 2, state = "";
 
 			if (state === "skip") state = "";
 			else if (state === "char") stack.push(char.charCodeAt(0)), state = "";
@@ -242,9 +238,9 @@ var Cubix = {
 			else if (char === "w") ip.d = (ip.d + 1) % 4, state = "rotate-l";
 			else if (char === "$") state = "skip";
 			else if (char === "@") return void (moveIP(), stop("Program finished."));
- 
+
 			else if (char === "?") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 3 : stack[stack.length-1] > 0 ? 1 : 0)) % 4;
-			else if (char === "!") { if (stack[stack.length-1] === 0) state = "skip"; }
+			else if (char === "!") { if (stack.length && stack[stack.length-1]) state = "skip"; }
 			else if (char === "C") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 1 : stack[stack.length-1] > 0 ? 3 : 0)) % 4;
 			else if (char === "©") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 0 : stack[stack.length-1] > 0 ? 3 : 0)) % 4;
 			else if (char === "ª") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 0 : stack[stack.length-1] > 0 ? 1 : 0)) % 4;
@@ -252,14 +248,6 @@ var Cubix = {
 			else if (char === "¬") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 1 : stack[stack.length-1] > 0 ? 0 : 0)) % 4;
 			else if (char === "®") ip.d = (ip.d) , state = "rotate-r";
 			else if (char === "¯") ip.d = (ip.d) , state = "rotate-l";
-			else if (char === "°") ip.d = (ip.d) , state = "north";
-			else if (char === "±") ip.d = (ip.d) , state = "south";
-			else if (char === "²") ip.d = (ip.d) , state = "east";
-			else if (char === "³") ip.d = (ip.d) , state = "west";
-			//else if (char === "µ") { if (stack[stack.length-1] === 0) ip.d = ((ip.d + 1) % 4); }
-			//else if (char === "¶") { if (stack[stack.length-1] === 0) ip.d = ((ip.d + 3) % 4); }
-			//else if (char === "»") { if (stack[stack.length-1] < 0) ip.d = ((ip.d + 1) % 4); }
-			//else if (char === "¼") { if (stack[stack.length-1] < 0) ip.d = ((ip.d + 3) % 4); }
 
 			else if (char === "+") stack.push((stack[stack.length-2]||0)+(stack[stack.length-1]||0));
 			else if (char === "-") stack.push((stack[stack.length-2]||0)-(stack[stack.length-1]||0));
