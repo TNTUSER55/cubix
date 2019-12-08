@@ -256,10 +256,10 @@ var Cubix = {
 			else if (char === "±") ip.d = (ip.d) , state = "south";
 			else if (char === "²") ip.d = (ip.d) , state = "east";
 			else if (char === "³") ip.d = (ip.d) , state = "west";
-			else if (char === "µ") { if (stack[stack.length-1] === 0) ip.d = ((ip.d + 1) % 4); };
-			else if (char === "¶") { if (stack[stack.length-1] === 0) ip.d = ((ip.d + 3) % 4); };
-			else if (char === "»") { if (stack[stack.length-1] < 0) ip.d = ((ip.d + 1) % 4); };
-			else if (char === "¼") { if (stack[stack.length-1] < 0) ip.d = ((ip.d + 3) % 4); };
+			//else if (char === "µ") { if (stack[stack.length-1] === 0) ip.d = ((ip.d + 1) % 4); }
+			//else if (char === "¶") { if (stack[stack.length-1] === 0) ip.d = ((ip.d + 3) % 4); }
+			//else if (char === "»") { if (stack[stack.length-1] < 0) ip.d = ((ip.d + 1) % 4); }
+			//else if (char === "¼") { if (stack[stack.length-1] < 0) ip.d = ((ip.d + 3) % 4); }
 
 			else if (char === "+") stack.push((stack[stack.length-2]||0)+(stack[stack.length-1]||0));
 			else if (char === "-") stack.push((stack[stack.length-2]||0)-(stack[stack.length-1]||0));
