@@ -191,10 +191,10 @@ var Cubix = {
 
 			if (state === "rotate-l") ip.d = (ip.d + 3) % 4, state = "";
 			else if (state === "rotate-r") ip.d = (ip.d + 1) % 4, state = "";
-			if (state === "north") ip.d = 3, state = "";
-			if (state === "south") ip.d = 1, state = "";
-			if (state === "east") ip.d = 0, state = "";
-			if (state === "west") ip.d = 2, state = "";
+			else if (state === "north") ip.d = 3, state = "";
+			else if (state === "south") ip.d = 1, state = "";
+			else if (state === "east") ip.d = 0, state = "";
+			else if (state === "west") ip.d = 2, state = "";
 
 			if (state === "skip") state = "";
 			else if (state === "char") stack.push(char.charCodeAt(0)), state = "";
