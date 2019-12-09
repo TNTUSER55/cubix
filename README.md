@@ -103,10 +103,10 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 - `®` - go forward one square and turn right
 - `¯` - go forward one square and turn left
 - `»` - pops two in the stack
-
-
-
-
+- `¼` - input and ip north
+- `½` - input and ip east
+- `¾` - input and ip south
+- `À` - input and ip west
 
 
 ## Example programs
