@@ -102,6 +102,8 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 - `¬` - if the top item is less than zero, turn right; if the top item is more than zero, continue straight; otherwise, straight
 - `®` - go forward one square and turn right
 - `¯` - go forward one square and turn left
+- `»` - pops two in the stack
+
 
 
 

@@ -248,6 +248,7 @@ var Cubix = {
 			else if (char === "¬") ip.d = (ip.d + (stack[stack.length-1] < 0 ? 1 : stack[stack.length-1] > 0 ? 0 : 0)) % 4;
 			else if (char === "®") ip.d = (ip.d) , state = "rotate-r";
 			else if (char === "¯") ip.d = (ip.d) , state = "rotate-l";
+			else if (char === "»") stack.pop() stack.pop();
 
 			else if (char === "+") stack.push((stack[stack.length-2]||0)+(stack[stack.length-1]||0));
 			else if (char === "-") stack.push((stack[stack.length-2]||0)-(stack[stack.length-1]||0));
