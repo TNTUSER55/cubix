@@ -107,7 +107,9 @@ Unless specified otherwise (with "pop" or "in place"), operators do not remove t
 - `½` - input and ip east
 - `¾` - input and ip south
 - `À` - input and ip west
-
+- `Á` - Add 1 to e
+- `Â` - Subtract 1 from e
+- `Ã` - output e
 
 ## Example programs
 

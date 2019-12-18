@@ -130,7 +130,8 @@ var Cubix = {
 			j = 0,
 			k = 0,
 			c = 0,
-			p = 0;
+			p = 0,
+			e = 0;
 
 		for (i = 0; i < 6; i++) {
 			board[i] = [];
@@ -192,9 +193,9 @@ var Cubix = {
 			if (state === "rotate-l") ip.d = (ip.d + 3) % 4, state = "";
 			else if (state === "rotate-r") ip.d = (ip.d + 1) % 4, state = "";
 			else if (state === "north") ip.d = 0;
-			else if (state === "east") ip.d = 1;
+			else if (state === "east") ip.d = 3;
 			else if (state === "south") ip.d = 2;
-			else if (state === "west") ip.d = 3;
+			else if (state === "west") ip.d = 1;
 
 			if (state === "skip") state = "";
 			else if (state === "char") stack.push(char.charCodeAt(0)), state = "";
@@ -255,9 +256,11 @@ var Cubix = {
 			else if (char === "»") stack.pop(), stack.pop();
 			else if (char === "¼") stack.push(input ? input.charCodeAt(0): -1), input = input.slice(1), state= "north";
 			else if (char === "½") stack.push(input ? input.charCodeAt(0): -1), input = input.slice(1), state= "east";
-			else if (char === "¾") stack.push(input ? input.charCodeAt(0): -1), input = input.slice(1), state= "sounth";
+			else if (char === "¾") stack.push(input ? input.charCodeAt(0): -1), input = input.slice(1), state= "south";
 			else if (char === "À") stack.push(input ? input.charCodeAt(0): -1), input = input.slice(1), state= "west";
-
+			else if (char === "Á") e += 1;
+			else if (char === "Â") e -= 1;
+			else if (char === "Ã") output(e);
 
 
 
